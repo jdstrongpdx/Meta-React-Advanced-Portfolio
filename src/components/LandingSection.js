@@ -1,8 +1,7 @@
 import React from "react";
-import { Avatar, Heading, VStack, Box } from "@chakra-ui/react";
+import { Avatar, Heading, VStack } from "@chakra-ui/react";
 import FullScreenSection from "./FullScreenSection";
 
-const imgUrl = "https://i.pravatar.cc/150?img=7"
 const greeting = "Hello, I am Pete!";
 const bio1 = "A frontend developer";
 const bio2 = "specialised in React";
