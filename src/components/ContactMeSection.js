@@ -16,11 +16,19 @@ import * as Yup from 'yup';
 import FullScreenSection from "./FullScreenSection";
 import useSubmit from "../hooks/useSubmit";
 import {useAlertContext} from "../context/alertContext";
+import * as response from "@testing-library/user-event/dist/type";
 
 const LandingSection = () => {
   const {isLoading, response, submit} = useSubmit();
   const { onOpen } = useAlertContext();
   const url = "www.example.com";
+
+  // watch for responses and display message when present
+  useEffect(() => {
+    if(response) {
+      onOpen(response.type, response.message)
+    }
+  }, [response]);
 
   const formik = useFormik({
     initialValues: {
@@ -36,10 +44,12 @@ const LandingSection = () => {
       comment: Yup.string().required("Required").min(25, "Must be at least 25 characters"),
     }),
     onSubmit: async (values) => {
+      // useSubmit hook implementation
       await submit(url, values);
-      if (response?.type) {
-        onOpen(response.type, response.message)
-      }
+      // clear form if successful
+      if (response.type === 'success') {
+          formik.resetForm();
+        }
     },
   });
 
@@ -54,8 +64,7 @@ const LandingSection = () => {
         <Heading as="h1" id="contactme-section">
           Contact me
         </Heading>
-        <Box p={6} rounded="md" w="100%" >
-          <form onSubmit={formik.handleSubmit}>
+        <Box p={6} rounded="md" w="100%" as="form" onSubmit={formik.handleSubmit}>
             <VStack spacing={4}>
               <FormControl
                   id="firstName"
@@ -107,7 +116,6 @@ const LandingSection = () => {
                 Submit
               </Button>
             </VStack>
-        </form>
         </Box>
       </VStack>
     </FullScreenSection>

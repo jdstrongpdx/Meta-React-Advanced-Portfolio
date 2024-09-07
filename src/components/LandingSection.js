@@ -17,21 +17,10 @@ const LandingSection = () => (
     backgroundColor="#2A4365"
   >
     <VStack spacing={4} textAlign="center">
-      <Box>
       <Avatar src="https://i.pravatar.cc/150?img=7" name="Pete Avatar" size="xl"  />
-      <Heading size="xs"
-               px={4}
-               py={4}
-      >{greeting}</Heading>
-      <Heading size="xl"
-               px={4}
-               py={2}>
-        {bio1}</Heading>
-      <Heading size="xl"
-               px={4}
-               py={2}>
-        {bio2}</Heading>
-      </Box>
+      <Heading size="xs">{greeting}</Heading>
+      <Heading size="xl">{bio1}</Heading>
+      <Heading size="xl">{bio2}</Heading>
     </VStack>
   </FullScreenSection>
 );
